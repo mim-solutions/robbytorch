@@ -23,7 +23,7 @@ import seaborn as sns
 import torch.nn as nn
 from torch.utils.data import DataLoader
 from torchvision import transforms
-from collections import OrdedredDict
+from collections import OrderedDict
 
 # logging
 import mlflow
@@ -530,7 +530,7 @@ adv_trainer = trainer.clone(
 
 # Keep in mind that robust training takes considerably more time as we need to compute adversarial examples for every batch!
 
-# In[ ]:
+# In[31]:
 
 
 # let's start from non-robust model to show that robust training works!
@@ -549,7 +549,7 @@ adv_trainer.train_model(
 
 # It takes quite a long time. However robust models preserve robustness during transfer learning, therefore to save time we can skip robust data augmentation and evaluation during train phase:
 
-# In[ ]:
+# In[32]:
 
 
 def add_adv_data_eval(model, dataitem, phase):
@@ -593,7 +593,7 @@ adv_eval_trainer.train_model(
 
 # Robust models have interpretable gradients which let's us retrive some human-aligned features and understand what the model is really relying on.
 
-# In[ ]:
+# In[33]:
 
 
 def get_forward_explain(target: int=None, mult: float=None):
@@ -614,7 +614,7 @@ def get_forward_explain(target: int=None, mult: float=None):
 
 # `robby.explain` prints images modified toward minimization/maximization of value under "loss" key returned by the `fd`. We can move the images closer to or further away from the selected `label` or `cuteness` value.
 
-# In[ ]:
+# In[34]:
 
 
 def explain(model, dataitem, target=None, mult=None, rows=4, minimize=True, eps=80, step_size=20, Nsteps=60):
@@ -624,32 +624,32 @@ def explain(model, dataitem, target=None, mult=None, rows=4, minimize=True, eps=
            eps=eps, step_size=step_size, Nsteps=Nsteps, use_tqdm=True, minimize=minimize)
 
 
-# In[ ]:
+# In[35]:
 
 
 dataitem = next(iter(dataloaders["train"]))
 CLASSES
 
 
-# In[ ]:
+# In[36]:
 
 
 explain(model, dataitem, mult=0, rows=2) # reduce cuteness
 
 
-# In[ ]:
+# In[37]:
 
 
 explain(model, dataitem, mult=1.5, rows=2) # increase cuteness by 1.5
 
 
-# In[ ]:
+# In[38]:
 
 
 explain(model, dataitem, target=2, mult=1.5, rows=2) # increase cuteness by 1.5 and also move closer to 'pigeon'
 
 
-# In[ ]:
+# In[39]:
 
 
 explain(model, dataitem, target=2, mult=0, rows=2) # move closer to pigeon but try to reduce cuteness to 0
@@ -657,14 +657,14 @@ explain(model, dataitem, target=2, mult=0, rows=2) # move closer to pigeon but t
 
 # # Utilities
 
-# In[ ]:
+# In[40]:
 
 
 # Clean-up interruped tqdm instances and garbage-collect CUDA cache.
 robby.clean()
 
 
-# In[ ]:
+# In[41]:
 
 
 # print memory summary of given CUDA device
