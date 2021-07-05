@@ -1,0 +1,18 @@
+# Byte-compiled / optimized / DLL files
+.idea
+__pycache__
+.ipynb_checkpoints
+.~lock*
+.vscode
+
+# Distribution / packaging
+build/
+dist/
+*.egg-info/
+
+# Local files / trained models
+trained_models/temp/*
+ipython/trained_models/temp/*
+
+local/*
+ipython/local/*
