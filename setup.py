@@ -22,7 +22,7 @@ setup(
     # Versions should comply with PEP440. For a discussion on single-sourcing
     # the version across setup.py and the project code, see
     # https://packaging.python.org/en/latest/single_source_version.html
-    version='0.2.5',
+    version='0.2.7',
 
     description='Cool package for robust AI',
     long_description=long_description,
@@ -76,7 +76,7 @@ setup(
     # For an analysis of "install_requires" vs pip's requirements files see:
     # https://packaging.python.org/en/latest/requirements.html
     install_requires=['numpy', 'matplotlib', 'tqdm', 'pandas', 'seaborn', 
-        'livelossplot', 'mypy', 'mlflow', 'dill', 'pyinstrument'],
+        'livelossplot', 'mypy', 'mlflow', 'dill', 'pyinstrument', 'ipywidgets'],
 
     # List additional URLs that are relevant to your project as a dict.
     #
