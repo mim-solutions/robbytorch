@@ -29,7 +29,7 @@ pip install robbytorch
 
 # Usage
 
-The basics of the `Robbytorch` library are explained in the [ipython/RobbytorchTutorial.ipynb](https://github.com/mim-solutions/robbytorch/blob/master/ipython/RobbytorchTutorial.ipynb) standalone juputer notebook.
+The basics of the `Robbytorch` library are explained in the [ipython/RobbytorchTutorial.ipynb](https://github.com/mim-solutions/robbytorch/blob/master/ipython/RobbytorchTutorial.ipynb) juputer notebook.
 
 # TODO
 

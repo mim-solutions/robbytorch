@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# **Note**: This tutorial is self-contained - you don't need to download any additional files. We assume you have working Pytorch environment and `robbytorch` installed (por. [how to install robbytorch](https://pypi.org/project/robbytorch/))
+# **Note**: To run this notebook clone the [robbytorch repo](https://github.com/mim-solutions/robbytorch) and run this notebook from within. Alternatively you can just download the CuteDataset from [here](https://github.com/mim-solutions/robbytorch/tree/master/data/cute_dataset) and place it into `'./data/cute_dataset'` directory.
+# 
+# We assume you have working Pytorch environment and `robbytorch` installed (por. [how to install robbytorch](https://pypi.org/project/robbytorch/))
 
 # In[1]:
 
@@ -65,13 +67,17 @@ BATCH_SIZE = 32
 
 # # Introduction
 # 
-# Our task is to classify certain images of animals and also predict their cuteness. For that we download Caltech101 dataset and consider subset of 5 labels. We also add a `cuteness` column. 
+# Our task is to classify certain images of animals and also predict their cuteness. For that we consider a subset of Caltech101 dataset consisting of 5 labels. We also add a `cuteness` column. 
+# 
+# Remember to download the CuteDataset from [here](https://github.com/mim-solutions/robbytorch/tree/master/data/cute_dataset) and place it into `'./data/cute_dataset'` directory!
 
 # In[4]:
 
 
-# Download Caltech101 dataset and extract metadata to pd.Dataframe
-metadata, data_root = robby.tutorial.download_cute_dataset()
+# extract metadata to pd.Dataframe
+data_root = 'data/cute_dataset' 
+# note that this has been changed in robbytorch version 0.3
+metadata = robby.tutorial.load_cute_dataset(root=data_root)
 
 
 # In[5]:
