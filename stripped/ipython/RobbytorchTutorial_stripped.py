@@ -76,7 +76,7 @@ BATCH_SIZE = 32
 
 # extract metadata to pd.Dataframe
 data_root = 'data/cute_dataset' 
-# note that this has been changed in robbytorch version 0.3. Earlier versions will break.
+# note that this has been changed in robbytorch version 0.2.5. Earlier versions will break.
 metadata = robby.tutorial.load_cute_dataset(root=data_root)
 
 
