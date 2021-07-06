@@ -32,7 +32,7 @@ from . import resnet as robustness_resnet
 #   ```
 #   Or `latents = model[:-1](x)` in general.
 
-from ...utils import PathLike
+from ...utils import PathLike, mkdir_and_preserve_group
 
 
 ROBUSTNESS_URL = ("https://robustnessws4285631339.blob.core.windows.net"
@@ -135,7 +135,14 @@ def load_state_dict_from_robustness(
                       f" consider adding it to `ROBUSTNESS_HASHES`.")
     if cache_dir is None:
         cache_dir = pathlib.Path(torch.hub.get_dir()) / "checkpoints"
-    path = pathlib.Path(cache_dir) / model_name
+    else:
+        cache_dir = pathlib.Path(cache_dir)
+
+    if not cache_dir.exists():
+        warnings.warn(f"Saving in `{cache_dir}` but it does not exists. I'm creating the path now.")
+        mkdir_and_preserve_group(cache_dir)
+
+    path = cache_dir / model_name
     if not path.exists():
         print(f"Downloading {model_name} from {url} to {cache_dir}", file=sys.stderr)
         try:
