@@ -76,7 +76,7 @@ setup(
     # For an analysis of "install_requires" vs pip's requirements files see:
     # https://packaging.python.org/en/latest/requirements.html
     install_requires=['numpy', 'matplotlib', 'tqdm', 'pandas', 'seaborn', 
-        'livelossplot', 'mypy', 'mlflow', 'dill', 'pyinstrument', 'ipywidgets'],
+        'livelossplot', 'mypy', 'mlflow', 'dill', 'pyinstrument', 'ipywidgets', 'opencv-python'],
 
     # List additional URLs that are relevant to your project as a dict.
     #
