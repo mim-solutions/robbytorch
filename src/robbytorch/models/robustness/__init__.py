@@ -155,5 +155,12 @@ def load_state_dict_from_robustness(
     # The `robustness` library wraps each model in layers that we don't use.
     # We have to remove those layers from the state_dict.
     state_dict = state_dict["model"]
+    
     prefix = "module.attacker.model."
-    return {k[len(prefix):]: v for k, v in state_dict.items() if k.startswith(prefix)}
+    state_dict = {k[len(prefix):]: v for k, v in state_dict.items() if k.startswith(prefix)}
+
+    prefix = "model."
+    while next(iter(state_dict.keys())).startswith(prefix):
+        state_dict = {k[len(prefix):]: v for k, v in state_dict.items() if k.startswith(prefix)}
+
+    return state_dict
