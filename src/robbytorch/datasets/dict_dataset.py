@@ -43,7 +43,7 @@ class DictDataset(torch.utils.data.Dataset):
     def __getitem__(self, idx: int) -> Mapping[str, Any]:
         """Returns a {"data": data, **self.load_target_dict(idx)} dataitem for a given integer key.
 
-        Later torch.utils.data.DataLoader collates this dicts into a dict o batched items.
+        Later torch.utils.data.DataLoader collates this dicts into a dict of batched items.
         """
         data = self.load_data(idx)
 
