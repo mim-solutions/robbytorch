@@ -206,7 +206,7 @@ def get_optimizer(
         new_params: List[Dict] = []
         for key, options in params.items():
             options = copy.copy(options)
-            options["params"] = get_submodule(model, key).parameters()
+            options["params"] = get_parameters(model, key)
             if filter_requires_grad:
                 options["params"] = filter(lambda p: p.requires_grad, options["params"])
             new_params.append(options)
@@ -216,17 +216,20 @@ def get_optimizer(
     return cls(**spec)
 
 
-def get_submodule(module: nn.Module, path: str) -> nn.Module:
+def get_parameters(module: nn.Module, path: str) -> Iterable[nn.parameter.Parameter]:
     result = module
     names = path.split(".")
     if not names or names[0]:
-        raise ValueError(f"Submodule path should start with '.', got: {path!r}")
+        raise ValueError(f"Parameter path should start with '.', got: {path!r}")
     for i, name in enumerate(names[1:]):
         result = getattr(result, name, None)
         if not (isinstance(result, nn.Module) or isinstance(result, nn.parameter.Parameter)):
             p = ".".join(names[: (i + 2)])
-            raise AttributeError(f"No submodule {p} in {module}")
-    return result
+            raise AttributeError(f"No parameter {p} in {module}!")
+    if isinstance(result, nn.parameter.Parameter):
+        return [result]
+    else:
+        return result.parameters()
 
 
 def get_scheduler(
