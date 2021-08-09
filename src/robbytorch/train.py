@@ -224,7 +224,7 @@ def get_submodule(module: nn.Module, path: str) -> nn.Module:
     for i, name in enumerate(names[1:]):
         result = getattr(result, name, None)
         if not isinstance(result, nn.Module):
-            p = ".".join(names[: (i + 1)])
+            p = ".".join(names[: (i + 2)])
             raise AttributeError(f"No submodule {p} in {module}")
     return result
 
