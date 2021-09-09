@@ -1,5 +1,6 @@
 import mlflow
 import torch
+import wandb
 from livelossplot import PlotLosses
 from typing import Optional, List
 
@@ -32,6 +33,21 @@ class MLFlowWriter(Writer):
                 mlflow.log_param("epoch", epoch)
                 mlflow.log_params(self.params)
                 mlflow.log_metrics(logs)
+
+
+class WeightsAndBiasesWriter(Writer):
+    """Logs to weights and biases.
+
+    Expects wandb to be configured.
+    """
+
+    def __init__(self, log_per: int = 5):
+        self.log_per = log_per
+    
+    def log_metrics(self, logs, epoch, epochs, model):
+        if epoch % self.log_per == 0 or epoch == epochs:
+            logs = self.filter_logs(logs)
+            wandb.log(logs)
 
 
 class LiveLossWriter(Writer):

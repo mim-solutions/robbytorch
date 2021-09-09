@@ -5,19 +5,25 @@ import torch.nn as nn
 import torch.optim as optim
 from torch.utils.data import DataLoader
 from tqdm import tqdm
-from typing import Optional, List, Dict, Iterable, Callable, Union, Type
+from typing import Optional, List, Dict, Iterable, Callable, Union, Type, Generic
 from pathlib import Path
 
 from . import utils
 from .run import eval_mode, interruptible, tensors_to, train_mode, warn_if_not_cuda, DataTransform
 
+try:
+    from typing import Protocol
+except ImportError:  # Workaround for Python < 3.8.
+    Protocol = Generic
 
 # A callback that given a module returns values to log, e.g. {'loss': ..., 'accuracy': ...}.
 Evaluator = Callable[[nn.Module], Dict[str, float]]
 
 # Classes in `torch.optim.lr_scheduler`: they don't have a common base class.
 # TODO we could define a Scheduler ABC/protocol.
-Scheduler = object
+class Scheduler(Protocol):
+    def step(self, epoch=None) -> None:
+        ...
 
 Loss = Callable[[Tensor, Tensor], Tensor]
 

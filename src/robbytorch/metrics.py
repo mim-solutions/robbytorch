@@ -101,7 +101,7 @@ def get_better_CR(convs: pd.Series, clicks: pd.Series,
     return np.where(convs > 0, mean_cr, min_cr)
 
 
-def get_minimal_viable_CR(alpha: pd.Series, beta: pd.Series) -> np.array:
+def get_minimal_viable_CR(alpha: pd.Series, beta: pd.Series) -> np.ndarray:
     """
     For given Beta-distribution return left end of 0.95 confidence interval
     - interpreted as minimum practically possible value of CR for the distribution
