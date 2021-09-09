@@ -8,6 +8,8 @@ import pathlib, shutil, os
 from typing import overload, Callable, Dict, Generic, Iterable, Iterator, List, Mapping, Sequence, \
                    Tuple, TypeVar, Union
 
+from collections import abc
+
 try:
     from typing import Protocol
 except ImportError:  # Workaround for Python < 3.8.
@@ -32,16 +34,8 @@ class SizedIterable(Iterable[_T_co], Protocol[_T_co]):
 
 
 _T = TypeVar("_T")
-_T_co = TypeVar("_T_co", covariant=True)
 _S = TypeVar("_S")
 _V = TypeVar("_V")
-
-
-class SizedIterable(Iterable[_T_co], Protocol[_T_co]):
-    """A SizedIterable is any Iterable type that supports `len`."""
-
-    def __len__(self) -> int:
-        ...
 
 
 class map_iterable(SizedIterable[_S], Generic[_S]):
@@ -96,9 +90,9 @@ def map_structure(data, f: Callable):
         return type(data)(*(map_structure(v, f) for v in data))
     elif isinstance(data, dict):  # dict or subtypes like OrderedDict
         return type(data)(**{k: map_structure(v, f) for k, v in data.items()})
-    elif isinstance(data, Mapping):
+    elif isinstance(data, abc.Mapping):
         return {k: map_structure(v, f) for k, v in data.items()}
-    elif isinstance(data, List) or isinstance(data, Tuple):
+    elif isinstance(data, list) or isinstance(data, tuple):
         return [map_structure(v, f) for v in data]
     else:
         return f(data)
