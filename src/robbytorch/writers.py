@@ -5,8 +5,7 @@ from livelossplot import PlotLosses
 from typing import Optional, List
 
 from . import utils
-
-
+from wandb.sdk.wandb_run import Run
 
 class Writer(object):
 
@@ -37,17 +36,16 @@ class MLFlowWriter(Writer):
 
 class WeightsAndBiasesWriter(Writer):
     """Logs to weights and biases.
-
-    Expects wandb to be configured.
     """
 
-    def __init__(self, log_per: int = 5):
+    def __init__(self, run: Run, log_per: int = 5):
         self.log_per = log_per
+        self.run = run
     
     def log_metrics(self, logs, epoch, epochs, model):
         if epoch % self.log_per == 0 or epoch == epochs:
             logs = self.filter_logs(logs)
-            wandb.log(logs)
+            self.run.log(logs)
 
 
 class LiveLossWriter(Writer):
