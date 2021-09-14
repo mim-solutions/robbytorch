@@ -39,6 +39,12 @@ class WeightsAndBiasesWriter(Writer):
     """
 
     def __init__(self, run: Run, log_per: int = 5):
+        """Constructor.
+
+        Args:
+            run (Run): wandb Run e.g. from wandb.init().
+            log_per (int, optional): Log once every this amount of epochs. Defaults to 5.
+        """
         self.log_per = log_per
         self.run = run
     
