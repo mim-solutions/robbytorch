@@ -35,10 +35,11 @@ from . import resnet as robustness_resnet
 from ...utils import PathLike, mkdir_and_preserve_group
 
 
+
 ROBUSTNESS_URL = ("https://robustnessws4285631339.blob.core.windows.net"
-                  "/public-models/robust_imagenet/{}?sv=2019-10-10&ss=b&srt=sco&sp=rlx"
-                  "&se=2021-10-05T15:06:23Z&st=2020-06-10T07:06:23Z&spr=https"
-                  "&sig=Rwwsg9yfcSrbNLvxse%2F32XOy7ERWSLXMz9Ebka4pS20%3D")
+                  "/public-models/robust_imagenet/{}?sv=2020-08-04&ss=bfqt&srt=sco&sp=rwdlacupitfx"
+                  "&se=2051-10-06T07:09:59Z&st=2021-10-05T23:09:59Z&spr=https,http"
+                  "&sig=U69sEOSMlliobiw8OgiZpLTaYyOA5yt5pHHH5%2FKUYgI%3D")
 # Apparently non-resnet models were trained with original pytorch models, even if the `robustness`
 # lirbary provides alternative definitions.
 ROBUSTNESS_ARCHITECTURES = {
